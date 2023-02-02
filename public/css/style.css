@@ -1,0 +1,138 @@
+.center {
+  width: 10rem;
+  position: absolute;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  margin-top: -3rem;
+}
+
+
+.header {
+  font-size: 400%;
+  color: #00475c !important;
+  font-weight: 500;
+  font-family: "Noto Sans";
+}
+
+    
+.bg-div {
+  width: 100%;
+  height: 100%;
+}
+
+.list {
+  margin-left: 5%;
+  margin-right: 30%;
+}
+
+.line{
+  margin-top: 16.5%;
+  left: 47.67%;
+  width: 300px;
+  position:absolute;
+  border: 3px rgb(109, 223, 223) dotted;
+}
+
+
+.title{
+  margin-top: 60%;
+  font-size: 300%;
+  text-decoration:underline;
+}
+
+.gifttext{
+  background-color: #181926;
+  text-align: center;
+  font-size: small;
+  color: #cad3f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding:1rem;
+}
+
+.giftheader {
+  position: absolute;
+  margin-top: 2rem;
+  width: 40%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #181926;
+  text-align: center;
+  color: #cad3f5;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.cbutton {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  border-radius: 1rem;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  padding: 1rem;
+}
+
+.clist {
+  color:#00475c;
+  background-color: #b7bdf8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+.listcontainer {
+  margin: 2.5rem;
+}
+
+.mobile-content {
+  padding-top: 25rem !important;
+  margin-top: 8rem !important;
+  width: 90% !important;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+
+
+a:hover {
+  color: #179299;
+}
+
+#preview-audio {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+  background-color: #181926;
+  
+}
+
+
+#preview-image {
+  margin-bottom: 3rem;
+  border-radius: 1rem !important;
+  margin-left: 20% !important;
+  margin-right: 20% !important;
+  width: 60%;
+}
+
+#preview-document {
+  width: 21cm;
+  height: 29.7cm;
+}
+
+.main-menu-button {
+  font-size: 2rem;
+  padding: 5rem 1rem 5rem 1rem !important;
+}
+
+.stats {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 3rem;
+  width: 70%;
+}
