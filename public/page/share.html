@@ -7,7 +7,7 @@
     <title>TEADrop🦆</title>
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/nocss.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
 </head>
 <body>
@@ -16,33 +16,42 @@
         <div class="container-fluid vertical-center">
           <a class="nav-header" href="/">TEADrop🦆</a>
         </div>
-      </nav>
+    </nav>
       
-      <div style="display: flex; height:10%">
-        <div class="box bg-dark round-2 vertical-center-div" style="width: 60% !important;">
-          <img  id="preview-image" style="display:none;" />
-          <audio id="preview-audio" style="display:none;" class="height-center" controls></audio>
-          <iframe class="center-60" id="preview-document" style="display:none;" src="" frameborder="0"></iframe>
+      <div style="display: flex; height:10%;">
+        <div class="box bg-dark round-2 vertical-center-div" style="width: 60% !important; padding-left: 10%; padding-right: 10%;">
+          <div class="vertical-center">
+            <label class="center-60 bg-peach round-2 text-center animate__animated animate__jackInTheBox btn" style="display:inline-block; height: 100%;" id="upload_btn" for="file-picker">Choose a file</label>        
+          </div>  
+
+          <img id="preview-image" class="center-70" style="display:none; margin-top: 4rem; size: 200%;" />
+          <audio id="preview-audio" style="display:none;" controls></audio>
+          <video id="preview-video" style="display: none;" controls autoplay src=""></video>
+          <div class="div50">         
+            <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
+          </div>
           <p class="text-center " id="bumm"></p>
-          <input type="file" id="file-picker" accept="image/*, audio/*, application/pdf, video/*, text/plain" style="display: none;">
-          <label class="center-60 bg-peach round-2 text-center" style="display:inline-block; height: 100%;" id="upload_btn" for="file-picker">Choose a file</label>        
+          <input class="btn" type="file" id="file-picker" accept="image/*, audio/*, application/pdf, video/*, text/plain, application/zip" style="display: none;">
         </div>
 
-        <div style="width: 40% !important;" class="box height-center-div bg-peach round-2">
-          <div class="height-center">
-            <h3 class="text-box center-70 bg-dark" id="name">Name: - </h3>
-            <h3 class="text-box center-70 bg-dark" id="size">Dateingröße: - </h3>
-            <h3 class="text-box center-70 bg-dark" id="type">Typ: - </h3>
-            <h3 class="text-box center-70 round-2 bg-dark" id="Downloads">Download(s): 0</h3>
-            <h3 class="text-box center-70 bg-dark" id="Code">Sharing Code: ????</h3>
-
-
-        </div>
+        <div style="width: 40% !important; padding-left: 10%; padding-right: 10%;" class="box bg-peach round-2">
+            <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="name">Name: - </h3>
+            <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="size">Dateingröße: - </h3>
+            <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="type">Typ: - </h3>
         </div>
       </div>
 
-      <div class="box" style="display: flex;">
-        <h3 class="gifttext stats" id="time_left" >Time left: 0</h3>
+      <div style="display: flex; height:10%;">
+        <div style="width: 40% !important; padding-left: 10%; padding-right: 10%;" class="box height-center-div bg-peach round-2">
+          <h3 class="text-box-light bg-dark animate__animated animate__zoomInLeft" id="Downloads">Download(s): 0</h3>
+          <h3 class="text-box-light bg-dark animate__animated animate__zoomInLeft" id="Code">Sharing Code: ????</h3>
+        </div>
+
+        <div class="box bg-dark round-2 vertical-center-div" style="width: 60% !important; padding-left: 10%; padding-right: 10%;" >
+          <div class="vertical-center">
+            <h3 class="text-box-dark round-2 bg-peach height-center" id="time_left" >Time left: 0</h3>
+          </div>
+        </div>
       </div>
       <script src="/public/js/jquery-3.6.0.min.js"></script>
       <script src="public/js/script.js"></script>

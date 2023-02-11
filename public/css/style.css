@@ -97,27 +97,17 @@
 
 
 
-a:hover {
-  color: #179299;
-}
-
 #preview-audio {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-  margin-left: 35%;
-  margin-right: 35%;
-  width: 30%;
+  margin-top: 5rem;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
   background-color: #181926;
-  
 }
 
 
 #preview-image {
-  margin-bottom: 3rem;
   border-radius: 1rem !important;
-  margin-left: 20% !important;
-  margin-right: 20% !important;
-  width: 60%;
 }
 
 #preview-document {
@@ -131,8 +121,46 @@ a:hover {
 }
 
 .stats {
-  margin-left: 15%;
-  margin-right: 15%;
   margin-top: 3rem;
-  width: 70%;
+  width: 80%;
+}
+
+.btn {
+  cursor: pointer;
+  transition: all 0.2s ease-in!important;
+}
+
+.btn:hover {
+  transform: scale(1.1)!important;
+  background-color: #f5e0dc7e;
+}
+
+.div50 {
+  height: 100%;
+  display: block;
+}
+
+
+.share {
+  height: 8rem;
+  margin-top: 4rem;
+  margin-left: 15%;
+  margin-right: 45%;
+  width: 40% !important;
+  border-style: inherit;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 2px 2px 2px 2px black !important;
+
+}
+
+.receive {
+  border-style: inherit;
+  box-shadow: 2px 2px 2px 2px black !important;
+  height: 8rem;
+  border: #181926;
+  margin-top: -4rem;
+  margin-left: 35%;
+  margin-right: 15%;
+  width: 50% !important;
 }

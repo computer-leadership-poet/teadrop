@@ -1,32 +1,68 @@
 const filePicker = document.getElementById("file-picker");
 const previewImage = document.getElementById("preview-image");
+const previewVideo = document.getElementById("preview-video")
 const previewAudio = document.getElementById("preview-audio");
+const previewDocument = document.getElementById("preview-document");
 const upload_btn = document.getElementById("upload_btn");
 const time_left = document.getElementById("time_left");
+const input_tray = document.getElementById("input_tray");
+const receive_tray = document.getElementById("receive_tray");
 var file;
 let code;
+let codearrey = [];
 const codetext = document.getElementById("Code");
 let time = 0;
+let r_code
 
-
+load()
 
 function share() {
   window.location.href = "./share"; 
 }
+function receive() {
+  window.location.href = "./receive"; 
+}
+function check(){
+    r_code = document.getElementById('code-input').value;
+
+    if (codearray.indexOf(r_code) !== -1 && r_code != "") {
+      console.log(`${r_code} is in the array`);1
+      received()
+    } else if (r_code == "") {
+      receivetext.innerHTML="🦆 Gib was ein du Kek."
+    } else {
+      receivetext = document.getElementById("receivetext")
+      receivetext.innerHTML="❌ The code you entered doesnt exist. You may try again."
+    }
+}
+
+// executed when code exists
+function received() {
+  input_tray.style.display = "none";
+  receive_tray.style.display = "inline-block";
+    
+  console.log(r_code)
   
+  ajaxreceive()
+}
+
 
 async function timer() {
 // create timer 
   console.log("time is: " + time)
   let tl = 0
 
-  while (time < 30)
+  while (time < 60)
   {
     time++;
-    tl = 30 - time  
+    tl = 60 - time  
     time_left.innerHTML = "Time left: " + tl;
     await new Promise(resolve => setTimeout(resolve, 1000));  
   }
+  time_left.classList.add("animate__hinge", "animate__hinge");
+  await new Promise(resolve => setTimeout(resolve, 4500));  
+  window.location.replace("../")
+
 
   console.log("puff");
 }
@@ -35,67 +71,132 @@ filePicker.addEventListener("change", function() {
   file = filePicker.files[0];
   var reader = new FileReader();
   upload_btn.style.display = "none"
+
   // create sharing code
-  code = Math.floor(Math.random() * 10000); 
+  code = Math.floor(Math.random() * 10000);
+
+  if (codearray.indexOf(code) !== -1) {
+      console.log(`${r_code} already exists`);
+      code = Math.floor(Math.random() * 10000);
+
+  }
   console.log("Sharing Code: " + code);
   codetext.innerHTML = "Sharing Code: " + code;
+  codearrey.push(code);
+  console.log(codearrey);
+
   document.getElementById("name").innerHTML = "Name: " + file.name;
   document.getElementById("size").innerHTML = "Größe: " + (file.size / (1024 * 1024)).toFixed(2) + " MB";
   document.getElementById("type").innerHTML = "Typ: " + file.type;
 
+  display();
+  save();
+  timer();
+});
 
-
+function display() {
 
   if (file.type.match("image.*")) {
     // Datei ist ein Bild
-    reader.onload = function() {
-      previewImage.src = reader.result;
-      previewImage.style.display = "block";
-      previewAudio.style.display = "none";
-      previewDocument.style.display = "none";
-    };
-    reader.readAsDataURL(file);
+    previewImage.src = URL.createObjectURL(file);
+    previewImage.style.display = "block";
+    previewAudio.style.display = "none";
+    previewDocument.style.display = "none";
+
   } else if (file.type.match("audio.*")) {
-    // Datei ist eine mp3-Datei
+    // Datei ist eine Audio-Datei
     previewAudio.src = URL.createObjectURL(file);
     previewAudio.style.display = "block";
     previewImage.style.display = "none";
     previewDocument.style.display = "none";
 
+  } else if (file.type.match("video.*")) {
+    // Datei ist eine Video-Datei
+    previewVideo.src = URL.createObjectURL(file);
+    previewVideo.style.display = "block";
+
   } else if (file.type.match("application/pdf")) {
     // Datei ist eine pdf-Datei
-    previewDocument = document.getElementById("preview-document");
     previewDocument.style.display = "block";
     previewDocument.src = URL.createObjectURL(file);
-  }
 
-  else {
+  } else if (file.type.match("application/zip") || file.type.match("application/x-zip-compressed"))  {
+    // Datei ist eine zip-Datei
+    previewImage.src = "/public/assets/zip.png";
+    previewImage.style.display = "block";
+    previewAudio.style.display = "none";
+    previewImage.style.width = "25%";
+    previewDocument.style.display = "none";
+
+  } else {
     document.getElementById("bumm").innerHTML = "Keine Vorschau verfügbar 😥";
   }
   
+}
 
-  save();
-
-  timer();
-});
-
-
-
-
-
+/////////////////////////////
+//                         //
+//                         //
+//  | | ___   __ _  __| |  //
+//  | |/ _ \ / _` |/ _` |  //
+//  | | (_) | (_| | (_| |  //
+//  |_|\___/ \__,_|\__,_|  //
+//                         //                                      
+//                         //                                        
+/////////////////////////////
 function load(){
 
-    $.ajax({
-      data: formData,
-      traditional: true,
-      type: 'POST',
-      async : false,
-      url: '/public/file',
-      success: function (loaded_file) {
-        file = loaded_file
-      }
-    });
+  $.ajax({
+    dataType: "text",
+    traditional: true,
+    type: 'POST',
+    url: '/public/codearray',
+    async : false,
+
+    success: function (lcodearray) {
+      codearray = lcodearray
+      console.log(codearray)
+    }
+  });
 }
+
+function ajaxreceive() { 
+  $.ajax({
+    dataType: "STRING",
+    type: 'POST',
+    async : true,
+    cache: false,
+    data:{'r_code': r_code},
+    url: '/public/r_code',
+  });
+
+  $.ajax({
+    dataType: "file",
+    traditional: true,
+    type: 'POST',
+    url: '/public/receivefile',
+    async : true,
+
+    success: function (receivefile) {
+      file = receivefile
+      console.log("file received")
+      display();
+    }
+  });
+
+
+}
+
+
+/////////////////////////////
+//                         //
+//   ___  ______   _____   //
+//  / __|/ _` \ \ / / _ \  //
+//  \__ \ (_| |\ V /  __/  //
+//  |___/\__,_| \_/ \___|  //
+//                         //                                      
+//                         //                                        
+/////////////////////////////
 
 function save(){
     var formData = new FormData();
@@ -119,6 +220,8 @@ function save(){
       url: '/public/code',
     });
 
+
+
     formData.append("file", filePicker.files[0]);
     $.ajax({
       data: formData,
@@ -133,3 +236,4 @@ function save(){
     
 
   }
+
