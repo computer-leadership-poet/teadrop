@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEADrop🦆</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/nocss.css">
+</head>
+<body>
+    
+  <nav class="nav round-2 vertical-center-div bg-peach"> 
+    <div class="container-fluid vertical-center">
+      <a class="nav-header" href="/">TEADrop🦆</a>
+    </div>
+  </nav>
+   
+    <div id="input_tray" class="center-40 height-center-div bg-peach round-2" style="margin-top: 4rem; padding:2rem">
+        <h1 id="receivetext" style="margin-left: 5%;">Please enter a sharing code ...</h1>
+        <div style="display: flex; height:10%;">
+            <input maxlength="4" placeholder="code" id="code-input" class="input round-2 bg-dark">
+            <label onclick="check()" class="btn-dark round-2">Los!</label>
+        </div>
+    </div>
+
+    <p class="text-center" id="bumm"></p>
+    <div id="receive_tray" class="center-40  height-center-div bg-peach round-2" style="margin-top: 4rem; padding:2rem; display: none;">
+      <h1 id="filename" style="margin-left: 5%; margin-top: 1rem; display: inline-flex;" class="center">Dateiname</h1>
+          <img id="preview-image" class="center-70" style="display:none; margin-top: 4rem;" />
+          <audio id="preview-audio" style="display:none;" controls></audio>
+          <div class="div50">         
+            <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
+          </div>
+      <div style="display: flex; height:10%;">
+          <label onclick="download()" class="btn-dark round-2 center-50" style="margin-top: 7rem;">Download ⬇️</label>
+      </div>
+  </div>
+
+
+</body>
+<script src="/public/js/jquery-3.6.0.min.js"></script>
+<script src="/public/js/script.js" charset="utf-8"></script>
+</html>

@@ -13,8 +13,21 @@ let codearrey = [];
 const codetext = document.getElementById("Code");
 let time = 0;
 let r_code
-
+let filename;
+let countdown
 load()
+
+
+async function download() {
+  var write_file = function(data) {
+    var a = document.createElement("a");
+    a.href = window.URL.createObjectURL(data);
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  write_file(file)  
+}
 
 function share() {
   window.location.href = "./share"; 
@@ -49,17 +62,32 @@ function received() {
 
 async function timer() {
 // create timer 
-  console.log("time is: " + time)
-  let tl = 0
-
-  while (time < 60)
-  {
-    time++;
-    tl = 60 - time  
-    time_left.innerHTML = "Time left: " + tl;
-    await new Promise(resolve => setTimeout(resolve, 1000));  
+  let minutes = document.getElementById("minutes").value;
+  let seconds = document.getElementById("seconds").value;
+  if (minutes > 9 || seconds > 59) {
+    alert("Gib eine Zeit innerhalb von 10 Minuten an");
+    return;
   }
+
+  if (minutes == 0 )
+  {
+    console.log("Empty minutes")
+    time = seconds
+  }else{
+    time = minutes*6+seconds
+  }
+  
+  console.log("time is: " + minutes*6+seconds)
+
+  while (0 < time)
+  {
+    time_left.innerHTML = "Time left: " + time ;
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
+    time = time-1
+  }
+
   time_left.classList.add("animate__hinge", "animate__hinge");
+  time_left.innerHTML = "Time's up!";
   await new Promise(resolve => setTimeout(resolve, 4500));  
   window.location.replace("../")
 
@@ -70,6 +98,7 @@ async function timer() {
 filePicker.addEventListener("change", function() {
   file = filePicker.files[0];
   var reader = new FileReader();
+  console.log(file)
   upload_btn.style.display = "none"
 
   // create sharing code
@@ -87,7 +116,8 @@ filePicker.addEventListener("change", function() {
 
   document.getElementById("name").innerHTML = "Name: " + file.name;
   document.getElementById("size").innerHTML = "Größe: " + (file.size / (1024 * 1024)).toFixed(2) + " MB";
-  document.getElementById("type").innerHTML = "Typ: " + file.type;
+  document.getElementById("type").innerHTML = "Typ: " + file.type
+  ;
 
   display();
   save();
@@ -141,8 +171,8 @@ function display() {
 //  | |/ _ \ / _` |/ _` |  //
 //  | | (_) | (_| | (_| |  //
 //  |_|\___/ \__,_|\__,_|  //
-//                         //                                      
-//                         //                                        
+//                         //
+//                         //
 /////////////////////////////
 function load(){
 
@@ -160,27 +190,35 @@ function load(){
   });
 }
 
-function ajaxreceive() { 
+async function ajaxreceive() { 
+
+
   $.ajax({
-    dataType: "STRING",
+    dataType: "text",
+    traditional: true,
     type: 'POST',
-    async : true,
-    cache: false,
-    data:{'r_code': r_code},
-    url: '/public/r_code',
+    url: '/public/filename',
+    async : false,
+
+    success: function (rfile) {
+      filename = rfile
+      console.log(filename)
+    }
   });
 
   $.ajax({
-    dataType: "file",
-    traditional: true,
+    dataType: "text",
     type: 'POST',
-    url: '/public/receivefile',
-    async : true,
+    async : false,
+    traditional: true,
+    cache: false,
+    data:{'r_code': r_code},
+    url: '/public/r_code',
 
-    success: function (receivefile) {
-      file = receivefile
-      console.log("file received")
-      display();
+    success: function (r_code) {
+      file = new File([r_code], filename);
+      console.log(file)
+      //display();
     }
   });
 

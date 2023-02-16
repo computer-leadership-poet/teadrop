@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
 body {
     background-color: #b6bcf7;
+    font-family: 'Poppins', sans-serif;
 }
 
 a,p,h1,h2,h3 {
@@ -119,7 +123,7 @@ a,p,h1,h2,h3 {
 }
 .bg-grey {
     background-color: #6e738d;
-    box-shadow: 2px 2px 0.7px 0.5px #f5e0dc;
+    box-shadow: 2px 2px 0.7px 0.5px black;
 }
 .bg-peach {
     background-color: #f5e0dc;
@@ -137,6 +141,7 @@ a,p,h1,h2,h3 {
     box-shadow: 2px 2px 0.7px 0.5px black;
     color:#181926;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif
 }
 
 .btn-dark {
@@ -145,6 +150,8 @@ a,p,h1,h2,h3 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     color: #f5e0dc;
     cursor: pointer;
+    border-color: #181926;
+    font-family: 'Poppins', sans-serif
 }
 .btn-dark:hover{
     transform: scale(1.1)!important;
@@ -157,7 +164,7 @@ a,p,h1,h2,h3 {
 .text {
     color:#181926; text-align:center;
 }
-.input {
+input {
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;

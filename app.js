@@ -12,7 +12,8 @@ var multer  = require('multer');
 app.use(express.json())
 let fname = "empty";
 let code;
-let receivefile;
+let temp_name;
+let rfile;
 //app.use(favicon(path.join(__dirname, '/', 'favicon.ico')));
 
 
@@ -68,10 +69,10 @@ async function timebomb() {
     await new Promise(resolve => setTimeout(resolve, 1000));  
   }
 
-  codearray = codearray.filter(item => item !== temp_code)
+  //codearray = codearray.filter(item => item !== temp_code)
   console.log(codearray)
 
-  fs.rm("./uploads/" + temp_code + "/",{ recursive: true, force: true }, (err) => {});
+  //fs.rm("./uploads/" + temp_code + "/",{ recursive: true, force: true }, (err) => {});
 }
 
 /////////////////////////////
@@ -87,6 +88,11 @@ async function timebomb() {
 
 app.post('/public/codearray', function(req, res) {
   res.send(codearray);
+});
+
+app.post('/public/filename', function(req, res) {
+  console.log(rfile)
+  res.send(temp_name);
 });
 
 /////////////////////////////
@@ -131,12 +137,22 @@ app.post('/public/r_code', function(req, res) {
   } catch (err) {
     console.error(err);
   }
-  
-  receivefile = fs.readdir("./uploads/" + r_code + "/", function response(){
-    app.post('/public/receivefile', function(req, res) {
-      res.send(receivefile);
-    });
+
+  fs.readdir("./uploads/" + r_code + "/", (err, files) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log("\nCurrent directory filenames:");
+      files.forEach(rfile => {
+        temp_name = rfile 
+        console.log(rfile);
+        const file = fs.readFileSync("./uploads/" + r_code + "/" + rfile)
+        const goodbyefile = file
+        res.send(goodbyefile);
+      })
+    }
   })
+
 });
 
 
@@ -148,6 +164,6 @@ app.post('/public/file', upload.single('file'), function(req, res) {
     } catch (err) {
       console.error(err);
     }
-  
+    console.log(file.type)
     res.send(file);
   });

@@ -1,3 +1,4 @@
+
 .center {
   width: 10rem;
   position: absolute;
@@ -127,12 +128,16 @@
 
 .btn {
   cursor: pointer;
-  transition: all 0.2s ease-in!important;
+  transition: all 0.1s ease-in!important;
 }
 
 .btn:hover {
   transform: scale(1.1)!important;
-  background-color: #f5e0dc7e;
+  background-color: #b7bdf8;
+  border-style: solid;
+  border-color: #cad3f5;
+  border-width: 0.4rem;
+  color: white;
 }
 
 .div50 {
@@ -142,16 +147,14 @@
 
 
 .share {
-  height: 8rem;
-  margin-top: 4rem;
-  margin-left: 15%;
-  margin-right: 45%;
-  width: 40% !important;
   border-style: inherit;
-  position: absolute;
-  z-index: 10;
   box-shadow: 2px 2px 2px 2px black !important;
-
+  height: 8rem;
+  border: #181926;
+  margin-top: 2rem;
+  margin-left: 20%;
+  margin-right: 20%;
+  width: 50% !important;
 }
 
 .receive {
@@ -159,8 +162,12 @@
   box-shadow: 2px 2px 2px 2px black !important;
   height: 8rem;
   border: #181926;
-  margin-top: -4rem;
-  margin-left: 35%;
-  margin-right: 15%;
+  margin-top: 8rem;
+  margin-left: 20%;
+  margin-right: 20%;
   width: 50% !important;
+}
+
+.text_color {
+  color: #cad3f5;
 }

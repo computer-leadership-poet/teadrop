@@ -30,7 +30,7 @@
           <div class="div50">         
             <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
           </div>
-          <p class="text-center " id="bumm"></p>
+          <p class="text-center" id="bumm"></p>
           <input class="btn" type="file" id="file-picker" accept="image/*, audio/*, application/pdf, video/*, text/plain, application/zip" style="display: none;">
         </div>
 
@@ -38,6 +38,14 @@
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="name">Name: - </h3>
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="size">Dateingröße: - </h3>
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="type">Typ: - </h3>
+            <div class="text-box-light bg-dark animate__animated animate__zoomInRight">
+              <h3 class="text_color">Timer</h3>
+              <label for="minutes">Minutes:</label>
+              <input maxlength="1" class="input round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="minutes" min="0" max="9" placeholder="0">
+              <label for="seconds">Seconds:</label>
+              <input maxlength="2" class="input round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="seconds" min="0" max="59" placeholder="30">
+            </div>
+            <button class="btn-dark round-2 center-50" style="margin-top: 1rem; margin-bottom: 1rem" onclick="timer()">Start</button>
         </div>
       </div>
 
