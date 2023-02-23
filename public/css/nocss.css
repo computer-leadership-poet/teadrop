@@ -161,6 +161,16 @@ a,p,h1,h2,h3 {
     transform: scale(1.1)!important;
 }
 
+.btn-disabled {
+    padding: 1rem;
+    background-color: #6e738da4;
+    box-shadow: none;
+    color: lightgray;
+    cursor: not-allowed;
+    border-color: #6e738da4;
+    font-family: 'Poppins', sans-serif
+}
+
 .text {
     color:#181926; text-align:center;
 }

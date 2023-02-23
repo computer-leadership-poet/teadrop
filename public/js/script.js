@@ -5,9 +5,11 @@ const previewAudio = document.getElementById("preview-audio");
 const previewDocument = document.getElementById("preview-document");
 const upload_btn = document.getElementById("upload_btn");
 const time_left = document.getElementById("time_left");
+const timer_container = document.getElementById("timer_container");
 const input_tray = document.getElementById("input_tray");
 const receive_tray = document.getElementById("receive_tray");
-var file;
+const download_button = document.getElementById("download_button");
+var file
 let code;
 let codearrey = [];
 const codetext = document.getElementById("Code");
@@ -15,18 +17,20 @@ let time = 0;
 let r_code
 let filename;
 let countdown
+let startBtn = document.getElementById("initiate")
+let blob
+
+
 load()
 
 
-async function download() {
-  var write_file = function(data) {
-    var a = document.createElement("a");
-    a.href = window.URL.createObjectURL(data);
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-  write_file(file)  
+function download() {
+  download_file = window.URL.createObjectURL(new Blob([file]));
+  const link = document.createElement('a');
+  link.href = download_file;
+  link.setAttribute('download', filename);
+  document.body.appendChild(link);
+  link.click();
 }
 
 function share() {
@@ -60,35 +64,74 @@ function received() {
 }
 
 
+
+function checkInput(input) {
+  if (input.value > parseInt(input.max)) {
+    input.value = input.max;
+  }
+}
+
 async function timer() {
-// create timer 
-  let minutes = document.getElementById("minutes").value;
-  let seconds = document.getElementById("seconds").value;
-  if (minutes > 9 || seconds > 59) {
-    alert("Gib eine Zeit innerhalb von 10 Minuten an");
-    return;
+  // create timer 
+  let minutes = parseInt(document.getElementById("minutes").value, 10);
+  let seconds = parseInt(document.getElementById("seconds").value, 10);
+
+  console.log(minutes)
+  console.log(seconds)
+
+  if (isNaN(minutes) && isNaN(seconds))
+  {
+    console.log("Default timer")
+    time = 30
+
+  }else if (isNaN(minutes)) {
+    console.log("Empty minutes")
+    console.log(seconds)
+    time = seconds
+
+  }else if (isNaN(seconds)) {
+    console.log("seconds")
+    console.log(seconds)
+    time = (minutes*60)+30
+
+  }else{
+    time = (Number(minutes)*60)+seconds;
+    console.log(time)
   }
 
-  if (minutes == 0 )
-  {
-    console.log("Empty minutes")
-    time = seconds
-  }else{
-    time = minutes*6+seconds
-  }
+  // deaktiviert alles 
+  startBtn.textContent = "Gestartet";
+  startBtn.disabled = true;
+  startBtn.classList.add("btn-disabled");
+  startBtn.classList.remove("btn-dark");
+  document.getElementById("minutes").disabled = true;
+  document.getElementById("seconds").disabled = true;
   
-  console.log("time is: " + minutes*6+seconds)
+  // Input-Feld für Sekunden
+  let inputSeconds = document.getElementById("seconds");
+  inputSeconds.oninput = function() {
+    if (inputSeconds.value > 59) {
+      inputSeconds.value = 59;
+    }
+
+  };
+
+
+
+  
+  console.log("time is: " + time)
 
   while (0 < time)
   {
     time_left.innerHTML = "Time left: " + time ;
     await new Promise(resolve => setTimeout(resolve, 1000)); 
-    time = time-1
+   time = time-1
   }
 
   time_left.classList.add("animate__hinge", "animate__hinge");
+  timer_container.classList.add("animate__hinge", "animate__hinge");
   time_left.innerHTML = "Time's up!";
-  await new Promise(resolve => setTimeout(resolve, 4500));  
+  await new Promise(resolve => setTimeout(resolve, 3500));  
   window.location.replace("../")
 
 
@@ -100,6 +143,10 @@ filePicker.addEventListener("change", function() {
   var reader = new FileReader();
   console.log(file)
   upload_btn.style.display = "none"
+  startBtn.classList.add("btn-dark");
+  startBtn.classList.remove("btn-disabled");
+  startBtn.textContent = "Timer starten";
+  startBtn.disabled = false;
 
   // create sharing code
   code = Math.floor(Math.random() * 10000);
@@ -121,7 +168,6 @@ filePicker.addEventListener("change", function() {
 
   display();
   save();
-  timer();
 });
 
 function display() {
@@ -166,7 +212,7 @@ function display() {
 
 /////////////////////////////
 //                         //
-//                         //
+//   _                     //
 //  | | ___   __ _  __| |  //
 //  | |/ _ \ / _` |/ _` |  //
 //  | | (_) | (_| | (_| |  //
@@ -205,24 +251,31 @@ async function ajaxreceive() {
       console.log(filename)
     }
   });
-
+  
   $.ajax({
     dataType: "text",
     type: 'POST',
-    async : false,
+    async : true,
     traditional: true,
     cache: false,
     data:{'r_code': r_code},
     url: '/public/r_code',
-
-    success: function (r_code) {
-      file = new File([r_code], filename);
-      console.log(file)
-      //display();
-    }
   });
 
 
+  $.ajax({
+    url: 'public/openfile',
+    method: 'POST',
+    xhrFields: {
+      responseType: 'blob'
+    },
+    success: function(data, textStatus, xhr) {
+      file = data
+      filename = xhr.getResponseHeader('Content-Disposition').split('filename=')[1];
+      document.getElementById("filename").innerHTML = filename
+      display()
+    }
+  });
 }
 
 

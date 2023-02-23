@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
+const mime = require('mime-types');
 const app = express();
 const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const { json } = require('express');
 const favicon = require('serve-favicon');
-var codearray = [];
+var codearray = [1731];
 var $ = require('jquery');
 var multer  = require('multer');
 app.use(express.json())
@@ -69,10 +69,10 @@ async function timebomb() {
     await new Promise(resolve => setTimeout(resolve, 1000));  
   }
 
-  //codearray = codearray.filter(item => item !== temp_code)
+  codearray = codearray.filter(item => item !== temp_code)
   console.log(codearray)
 
-  //fs.rm("./uploads/" + temp_code + "/",{ recursive: true, force: true }, (err) => {});
+  fs.rm("./uploads/" + temp_code + "/",{ recursive: true, force: true }, (err) => {});
 }
 
 /////////////////////////////
@@ -95,6 +95,26 @@ app.post('/public/filename', function(req, res) {
   res.send(temp_name);
 });
 
+app.post('/public/openfile', function(req, res) {
+  console.log("openfile with code: " + r_code)
+  fs.readdir("./uploads/" + r_code + "/", (err, files) => {
+    if (err)
+      console.log(err);
+    else {
+      console.log("\nCurrent directory filenames:");
+      files.forEach(rfile => {
+        temp_name = rfile 
+        res.attachment(path.join(__dirname, "/uploads/" + r_code + "/" + temp_name));
+        const contentType = mime.lookup(temp_name);
+        if (contentType) {
+          res.type(contentType);
+        }
+        res.sendFile(path.join(__dirname, "/uploads/" + r_code + "/" + temp_name));
+      });
+
+    }
+  })
+});  
 /////////////////////////////
 //                         //
 //   ___  ______   _____   //
@@ -137,22 +157,6 @@ app.post('/public/r_code', function(req, res) {
   } catch (err) {
     console.error(err);
   }
-
-  fs.readdir("./uploads/" + r_code + "/", (err, files) => {
-    if (err)
-      console.log(err);
-    else {
-      console.log("\nCurrent directory filenames:");
-      files.forEach(rfile => {
-        temp_name = rfile 
-        console.log(rfile);
-        const file = fs.readFileSync("./uploads/" + r_code + "/" + rfile)
-        const goodbyefile = file
-        res.send(goodbyefile);
-      })
-    }
-  })
-
 });
 
 
