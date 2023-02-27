@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 
 .center {
   width: 10rem;
@@ -109,6 +111,7 @@
 
 #preview-image {
   border-radius: 1rem !important;
+  
 }
 
 #preview-document {
@@ -171,3 +174,63 @@
 .text_color {
   color: #cad3f5;
 }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(14, 14, 14, 0.705);
+  z-index: 999;
+  display: none;
+}
+
+#popup {
+  position: fixed;
+  top: 30%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  background: #181926;
+  z-index: 1000;
+  width: 600px;
+  height: 370px;
+  display: none;
+  border-radius: 10px;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#popup p {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  color: white;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+#popup button {
+  padding: 10px 20px;
+  background-color: #b6bcf7;
+  color: #fff;
+  width: 80%;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 2.5rem;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+#popup button:hover {
+  background-color: #dfe2ff;
+
+}
+
+

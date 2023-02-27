@@ -1,3 +1,4 @@
+const WebSocket = require ("ws");
 const express = require('express');
 const path = require('path');
 const mime = require('mime-types');
@@ -14,6 +15,8 @@ let fname = "empty";
 let code;
 let temp_name;
 let rfile;
+let current_time
+let time
 //app.use(favicon(path.join(__dirname, '/', 'favicon.ico')));
 
 
@@ -34,7 +37,6 @@ app.get('/receive', (_, res) => {
   res.sendFile('public/page/receive.html', {root: __dirname })});
   
 app.use(express.static('public'));
-  
 
 // port listenter
 app.listen(port, () => {
@@ -49,28 +51,30 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, fname);
-    timebomb()
   }
 
 });
 
 var upload = multer({ storage: storage });
 
-async function timebomb() {
-  let time = 0;
+
+async function timebomb(_callback) {
+  let current_time = 0;
   const temp_code = code
+
+  // download counter websocket
+  let downloads = 0
+
+
   codearray.push(temp_code);
-  console.log(codearray)
-  
-  while (time < 60)
+
+  while (current_time < time)
   {
-    time++;
-    tl = 60 - time
+    current_time++;
     await new Promise(resolve => setTimeout(resolve, 1000));  
   }
 
   codearray = codearray.filter(item => item !== temp_code)
-  console.log(codearray)
 
   fs.rm("./uploads/" + temp_code + "/",{ recursive: true, force: true }, (err) => {});
 }
@@ -86,22 +90,16 @@ async function timebomb() {
 //                         //                                        
 /////////////////////////////
 
-app.post('/public/codearray', function(req, res) {
-  res.send(codearray);
-});
 
 app.post('/public/filename', function(req, res) {
-  console.log(rfile)
   res.send(temp_name);
 });
 
 app.post('/public/openfile', function(req, res) {
-  console.log("openfile with code: " + r_code)
   fs.readdir("./uploads/" + r_code + "/", (err, files) => {
     if (err)
       console.log(err);
     else {
-      console.log("\nCurrent directory filenames:");
       files.forEach(rfile => {
         temp_name = rfile 
         res.attachment(path.join(__dirname, "/uploads/" + r_code + "/" + temp_name));
@@ -126,6 +124,21 @@ app.post('/public/openfile', function(req, res) {
 /////////////////////////////
 
 
+app.post('/public/time', function(req, res) {
+  time = req.body.time;
+  try {
+    console.log("time saved : " + time);
+  } catch (err) {
+    console.error(err);
+  }
+  res.send(time);
+
+  timebomb(function() {
+    console.log('huzzah, I\'m done!');
+});    
+
+});
+
 app.post('/public/name', function(req, res) {
   fname = req.body.name;
 
@@ -137,6 +150,16 @@ app.post('/public/name', function(req, res) {
   res.send(fname);
 });
 
+app.post('/public/check_code', function(req, res) {
+  let check_code = req.body.r_code;
+
+  if (codearray.indexOf(check_code) !== -1) {
+    res.send("Top");
+  }else{
+    res.send("Blä");
+  }
+});
+
 app.post('/public/code', function(req, res) {
   code = req.body.code;
   console.log(codearray);
@@ -146,6 +169,7 @@ app.post('/public/code', function(req, res) {
   } catch (err) {
     console.error(err);
   }
+
   fs.mkdirSync("uploads/"+code);
   res.send(code);
 });
@@ -161,13 +185,14 @@ app.post('/public/r_code', function(req, res) {
 
 
 app.post('/public/file', upload.single('file'), function(req, res) {
-    var file = req.file;
+  var file = req.file;
   
-    try {
-      console.log("file saved successfully at : " + file.path);
-    } catch (err) {
-      console.error(err);
-    }
-    console.log(file.type)
-    res.send(file);
-  });
+  try {
+    console.log("file saved successfully at : " + file.path);
+  } catch (err) {
+    console.error(err);
+  }
+  console.log(file.type)
+  res.send(file);
+});
+

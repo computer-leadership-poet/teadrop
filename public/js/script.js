@@ -11,7 +11,7 @@ const receive_tray = document.getElementById("receive_tray");
 const download_button = document.getElementById("download_button");
 var file
 let code;
-let codearrey = [];
+let codearray = [];
 const codetext = document.getElementById("Code");
 let time = 0;
 let r_code
@@ -19,12 +19,13 @@ let filename;
 let countdown
 let startBtn = document.getElementById("initiate")
 let blob
+const overlay = document.getElementById("overlay");
+const popup = document.getElementById("popup");
+const reloadBtn = document.getElementById("reloadBtn");
 
 
-load()
-
-
-function download() {
+async function download() {
+  await new Promise(resolve => setTimeout(resolve, 10));  
   download_file = window.URL.createObjectURL(new Blob([file]));
   const link = document.createElement('a');
   link.href = download_file;
@@ -41,15 +42,29 @@ function receive() {
 }
 function check(){
     r_code = document.getElementById('code-input').value;
-
-    if (codearray.indexOf(r_code) !== -1 && r_code != "") {
-      console.log(`${r_code} is in the array`);1
-      received()
-    } else if (r_code == "") {
+  
+    if (r_code == "") {
       receivetext.innerHTML="🦆 Gib was ein du Kek."
     } else {
-      receivetext = document.getElementById("receivetext")
-      receivetext.innerHTML="❌ The code you entered doesnt exist. You may try again."
+      $.ajax({
+        type: 'POST',
+        async : true,
+        cache: false,
+        data:{'r_code': r_code},
+        url: '/public/check_code',
+        success: function(response) {
+          console.log("prossesing")
+          if (response == "Top")
+          {
+            console.log(`${r_code} is in the array`);1
+            received()
+          }else{
+            receivetext = document.getElementById("receivetext")
+            receivetext.innerHTML="❌ The code you entered doesnt exist. You may try again."
+        
+          }
+        }
+      });
     }
 }
 
@@ -72,35 +87,60 @@ function checkInput(input) {
 }
 
 async function timer() {
+
   // create timer 
   let minutes = parseInt(document.getElementById("minutes").value, 10);
   let seconds = parseInt(document.getElementById("seconds").value, 10);
 
-  console.log(minutes)
-  console.log(seconds)
 
+  // sharing code //
+  code = Math.floor(Math.random() * 10000);
+
+  if (codearray.indexOf(code) !== -1) {
+      console.log(`${r_code} already exists`);
+      code = Math.floor(Math.random() * 10000);
+
+  }
+  console.log("Sharing Code: " + code);
+  codetext.innerHTML = "Sharing Code: " + code;
+  codearray.push(code);
+  console.log(codearray);
+  ////////////////////
+
+
+
+
+  //standard timer (30s)
   if (isNaN(minutes) && isNaN(seconds))
   {
     console.log("Default timer")
     time = 30
 
+    //minuten feld wird freigelassen
   }else if (isNaN(minutes)) {
     console.log("Empty minutes")
     console.log(seconds)
     time = seconds
 
+    //sekunden feld wird freigelassen
   }else if (isNaN(seconds)) {
     console.log("seconds")
     console.log(seconds)
     time = (minutes*60)+30
 
+
+    //beide felder werden ausgefüllt
   }else{
     time = (Number(minutes)*60)+seconds;
     console.log(time)
   }
 
-  // deaktiviert alles 
-  startBtn.textContent = "Gestartet";
+  // execute saving
+  save()
+
+  // deaktiviert timer einstellungen
+
+  startBtn.textContent = "Initiated";
   startBtn.disabled = true;
   startBtn.classList.add("btn-disabled");
   startBtn.classList.remove("btn-dark");
@@ -116,10 +156,9 @@ async function timer() {
 
   };
 
-
-
-  
   console.log("time is: " + time)
+
+
 
   while (0 < time)
   {
@@ -134,32 +173,40 @@ async function timer() {
   await new Promise(resolve => setTimeout(resolve, 3500));  
   window.location.replace("../")
 
+}
 
-  console.log("puff");
+function checkFileSize() {
+  if (file.size > 1000000000) {
+    overlay.style.display = "block";
+    overlay.classList.add("animate__animated")
+    overlay.classList.add("animate__fadeIn")
+    popup.style.display = "block";
+    popup.classList.add("animate__animated");
+    popup.classList.add("animate__slideInDown");
+    document.body.style.overflow = "hidden"; // disable scrolling
+    startBtn.disabled = true;
+    startBtn.classList.add("btn-disabled");
+    startBtn.classList.remove("btn-dark");
+
+    document.getElementById("minutes").disabled = true;
+    document.getElementById("seconds").disabled = true;
+    return; // exit the function if file size is too large
+  }
 }
 
 filePicker.addEventListener("change", function() {
   file = filePicker.files[0];
+  checkFileSize()
   var reader = new FileReader();
   console.log(file)
   upload_btn.style.display = "none"
   startBtn.classList.add("btn-dark");
   startBtn.classList.remove("btn-disabled");
-  startBtn.textContent = "Timer starten";
+  startBtn.textContent = "Initiate";
   startBtn.disabled = false;
 
   // create sharing code
-  code = Math.floor(Math.random() * 10000);
 
-  if (codearray.indexOf(code) !== -1) {
-      console.log(`${r_code} already exists`);
-      code = Math.floor(Math.random() * 10000);
-
-  }
-  console.log("Sharing Code: " + code);
-  codetext.innerHTML = "Sharing Code: " + code;
-  codearrey.push(code);
-  console.log(codearrey);
 
   document.getElementById("name").innerHTML = "Name: " + file.name;
   document.getElementById("size").innerHTML = "Größe: " + (file.size / (1024 * 1024)).toFixed(2) + " MB";
@@ -167,8 +214,16 @@ filePicker.addEventListener("change", function() {
   ;
 
   display();
-  save();
 });
+
+/// Pop-Up für File Sizes
+  reloadBtn.addEventListener("click", function() {
+    location.reload();
+  });
+
+function reloadPage() {
+  location.reload();
+}
 
 function display() {
 
@@ -205,7 +260,7 @@ function display() {
     previewDocument.style.display = "none";
 
   } else {
-    document.getElementById("bumm").innerHTML = "Keine Vorschau verfügbar 😥";
+    document.getElementById("bumm").innerHTML = "No preview available 🫤";
   }
   
 }
@@ -220,22 +275,6 @@ function display() {
 //                         //
 //                         //
 /////////////////////////////
-function load(){
-
-  $.ajax({
-    dataType: "text",
-    traditional: true,
-    type: 'POST',
-    url: '/public/codearray',
-    async : false,
-
-    success: function (lcodearray) {
-      codearray = lcodearray
-      console.log(codearray)
-    }
-  });
-}
-
 async function ajaxreceive() { 
 
 
@@ -278,7 +317,6 @@ async function ajaxreceive() {
   });
 }
 
-
 /////////////////////////////
 //                         //
 //   ___  ______   _____   //
@@ -290,41 +328,45 @@ async function ajaxreceive() {
 /////////////////////////////
 
 function save(){
-    var formData = new FormData();
-    let name = file.name;
-
-    $.ajax({
-      dataType: "STRING",
-      type: 'POST',
-      async : false,
-      cache:false,
-      data:{'name': name},
-      url: '/public/name',
-    });
+  var formData = new FormData();
+  let name = file.name;
     
-    $.ajax({
-      dataType: "STRING",
-      type: 'POST',
-      async : false,
-      cache:false,
-      data:{'code': code},
-      url: '/public/code',
-    });
-
-
-
-    formData.append("file", filePicker.files[0]);
-    $.ajax({
-      data: formData,
-      traditional: true,
-      type: 'POST',
-      contentType: false,
-      processData: false,
-      cache: false,
-      url: '/public/file',
-  
-    });
+  $.ajax({
+    dataType: "STRING",
+    type: 'POST',
+    async : false,
+    cache:false,
+    data:{'name': name},
+    url: '/public/name',
+  });
     
+  $.ajax({
+    dataType: "STRING",
+    type: 'POST',
+    async : false,
+    cache:false,
+    data:{'code': code},
+    url: '/public/code',
+  });
 
+  formData.append("file", file);
+  $.ajax({
+    data: formData,
+    traditional: true,
+    type: 'POST',
+    contentType: false,
+    processData: false,
+    cache: false,
+    url: '/public/file',
+  });
+    
+  $.ajax({
+    dataType: "STRING",
+    type: 'POST',
+    async : false,
+    cache: false,
+    data:{'time': time},
+    url: '/public/time',
+  });
   }
 
