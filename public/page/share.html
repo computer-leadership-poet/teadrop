@@ -27,7 +27,19 @@
       
     </nav>
 
-
+    <!-- Command Popup-->
+    <div id="overlay-command"></div>
+    <div class="" id="popup-command">
+      <div class="popup-container">
+        <p id="cheattext">Uii. You found a secret! As a reward, you can try millions of different codes to get special features ¯\_(ツ)_/¯.</p>
+        <div style="display: flex; height:10%;">
+          <input placeholder="code" id="cheat-input" class="input-bright round-2 ">
+          <label onclick="cheatcodecheck()" style="padding-top: 1.5%;" class="btn-bright round-2">Los!</label>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Error Popup-->
     <div id="overlay"></div>
     <div class="" id="popup">
       <div class="popup-container">
@@ -60,9 +72,9 @@
             <div class="text-box-light bg-dark animate__animated animate__zoomInRight">
               <h3 class="text_color">Timer</h3>
               <label for="minutes">Minutes:</label>
-              <input maxlength="1" class="input round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="minutes" min="0" max="9" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="0">
+              <input maxlength="1" class="input-bright round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="minutes" min="0" max="9" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="0">
               <label for="seconds">Seconds:</label>
-              <input maxlength="2" class="input round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="seconds" min="0" max="59" oninput="checkInput(this);" placeholder="30">
+              <input maxlength="2" class="input-bright round-2 bg-grey" style="margin-left: 10%; margin-right: 90%; width: 70%;" type="number" id="seconds" min="0" max="59" oninput="checkInput(this);" placeholder="30">
               
             </div>
             <button id="initiate" class="btn-disabled round-2 center-50" style="margin-top: 1rem; margin-bottom: 1rem;" disabled="true"onclick="timer()">Initiate</button>

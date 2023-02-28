@@ -174,11 +174,23 @@ a,p,h1,h2,h3 {
 .text {
     color:#181926; text-align:center;
 }
-input {
+.input-dark {
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;
     color: #f5e0dc;
+    font-size: larger;
+    border-color: black;
+    border-style: inherit;
+    padding: 1rem;
+}
+
+.input-bright {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    background-color: #f5e0dc;
+    color: #181926;
     font-size: larger;
     border-color: black;
     border-style: inherit;

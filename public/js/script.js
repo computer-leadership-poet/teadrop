@@ -9,6 +9,7 @@ const timer_container = document.getElementById("timer_container");
 const input_tray = document.getElementById("input_tray");
 const receive_tray = document.getElementById("receive_tray");
 const download_button = document.getElementById("download_button");
+const cheattext = document.getElementById("cheattext");
 var file
 let code;
 let codearray = [];
@@ -21,6 +22,8 @@ let startBtn = document.getElementById("initiate")
 let blob
 const overlay = document.getElementById("overlay");
 const popup = document.getElementById("popup");
+const popupcommand = document.getElementById("popup-command");
+const overlaycommand = document.getElementById("overlay-command");
 const reloadBtn = document.getElementById("reloadBtn");
 
 
@@ -370,3 +373,65 @@ function save(){
   });
   }
 
+
+//////////////////////////////////////////////////////////////////
+//    ____ _   _ _____    _  _____ ____ ___  ____  _____ ____   //
+//  /_ __| | | | ____|  / \|_   _/ ___/ _ \|  _ \| ____/ ___|   //
+// | |   | |_| |  _|   / _ \ | || |  | | | | | | |  _| \___ \   //
+// | |___|  _  | |___ / ___ \| || |__| |_| | |_| | |___ ___) |  //
+//  \____|_| |_|_____/_/   \_\_| \____\___/|____/|_____|____/   //
+//                                                              //
+//////////////////////////////////////////////////////////////////
+let check_key = false
+
+var keys = {};
+
+$(this).keypress((e) => {
+  if (e.keyCode == 13)
+  check_key = true
+})
+
+$(this).keypress((e) => {
+  if (e.keyCode == 48)
+  {
+    if (check_key == true)
+    {
+      // use e.keyCode
+      overlaycommand.style.display = "block";
+      overlaycommand.classList.add("animate__animated")
+      overlaycommand.classList.add("animate__fadeIn")
+      popupcommand.style.display = "block";
+      popupcommand.classList.add("animate__animated");
+      popupcommand.classList.add("animate__slideInDown");
+      document.body.style.overflow = "hidden"; // disable scrolling
+  
+    }
+  }
+});
+
+function cheatcodecheck(){
+  r_code = document.getElementById('cheat-input').value;
+
+  if (r_code == "") {
+    cheattext.innerHTML="🦆 Gib was ein du Kek."
+  } else {
+    $.ajax({
+      type: 'POST',
+      async : true,
+      cache: false,
+      data:{'r_code': r_code},
+      url: '/public/check_cheat_code',
+      success: function(response) {
+        console.log("prossesing")
+        if (response == "1")
+        {
+          cheattext.innerHTML="✅  You entered secret cheat code number 1."
+        }else if (response == "2"){
+          cheattext.innerHTML="✅  You entered secret cheat code number 2."
+        }else if (response == "wrong"){
+          cheattext.innerHTML="❌ The code you entered doesnt exist. You may try again."
+        }
+      }
+    });
+  }
+}

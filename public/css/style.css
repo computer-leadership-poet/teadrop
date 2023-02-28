@@ -175,7 +175,7 @@
   color: #cad3f5;
 }
 
-#overlay {
+#overlay, #overlay-command{
   position: fixed;
   top: 0;
   left: 0;
@@ -186,7 +186,7 @@
   display: none;
 }
 
-#popup {
+#popup, #popup-command{
   position: fixed;
   top: 30%;
   left: 30%;
@@ -194,6 +194,18 @@
   background: #181926;
   z-index: 1000;
   width: 600px;
+  height: 370px;
+  display: none;
+  border-radius: 10px;
+}
+
+#popup-command{
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  background: #181926;
+  z-index: 1000;
+  width: 80%;
   height: 370px;
   display: none;
   border-radius: 10px;
@@ -207,7 +219,7 @@
   height: 100%;
 }
 
-#popup p {
+#popup p, #popup-command p{
   font-size: 2.4rem;
   margin-bottom: 20px;
   color: white;
@@ -232,5 +244,3 @@
   background-color: #dfe2ff;
 
 }
-
-

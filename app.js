@@ -159,6 +159,18 @@ app.post('/public/check_code', function(req, res) {
     res.send("Blä");
   }
 });
+app.post('/public/check_cheat_code', function(req, res) {
+  let check_code = req.body.r_code;
+
+  if (check_code == "666")
+  {
+    res.send("1");
+  }else if (check_code == "2133214214"){
+    res.send("2");
+  }else{
+    res.send("wrong")
+  }
+});
 
 app.post('/public/code', function(req, res) {
   code = req.body.code;
