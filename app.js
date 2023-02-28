@@ -159,15 +159,24 @@ app.post('/public/check_code', function(req, res) {
     res.send("Blä");
   }
 });
+
+
 app.post('/public/check_cheat_code', function(req, res) {
   let check_code = req.body.r_code;
+  let status = false
+  cheatcodes = ["666", "1111"]
 
-  if (check_code == "666")
+  
+  cheatcodes.forEach(element => {
+    if (element == check_code)
+    {
+      res.send(cheatcodes.indexOf(element).toString())
+      status = true
+    }
+  });
+
+  if (status != true)
   {
-    res.send("1");
-  }else if (check_code == "2133214214"){
-    res.send("2");
-  }else{
     res.send("wrong")
   }
 });

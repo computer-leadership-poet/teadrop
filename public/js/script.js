@@ -411,7 +411,6 @@ $(this).keypress((e) => {
 
 function cheatcodecheck(){
   r_code = document.getElementById('cheat-input').value;
-
   if (r_code == "") {
     cheattext.innerHTML="🦆 Gib was ein du Kek."
   } else {
@@ -423,12 +422,13 @@ function cheatcodecheck(){
       url: '/public/check_cheat_code',
       success: function(response) {
         console.log("prossesing")
-        if (response == "1")
-        {
+        if (response == "0"){
+          cheattext.innerHTML="✅  You entered secret cheat code number 0."
+        }
+        else if (response == "1"){
           cheattext.innerHTML="✅  You entered secret cheat code number 1."
-        }else if (response == "2"){
-          cheattext.innerHTML="✅  You entered secret cheat code number 2."
-        }else if (response == "wrong"){
+        }
+        else if (response == "wrong"){
           cheattext.innerHTML="❌ The code you entered doesnt exist. You may try again."
         }
       }
