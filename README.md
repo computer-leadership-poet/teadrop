@@ -4,6 +4,14 @@ Teadrop is a web based sharing tool, that lets you share files between all opera
 
 It`s build using NodeJS as a backend and Jquery for backend and client communication.
 
+## Gallery
+* Receive page
+![teaddrop_demo_receive.png](teaddrop_demo_receive.png)
+
+* Share page
+![teaddrop_demo_share.png](teaddrop_demo_share.png)
+
+
 ## Installation
 We currently only provide official support for linux based OSs. If you want to use windows this next few steps may differ.
 
