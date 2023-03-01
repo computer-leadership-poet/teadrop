@@ -6,7 +6,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-a,p,h1,h2,h3 {
+a {
     color: #181926;
 }
   
@@ -121,6 +121,7 @@ a,p,h1,h2,h3 {
     background-color: #181926;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .bg-grey {
     background-color: #6e738d;
     box-shadow: 2px 2px 0.7px 0.5px black;

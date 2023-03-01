@@ -35,7 +35,12 @@ app.get('/share', (_, res) => {
 
 app.get('/receive', (_, res) => {
   res.sendFile('public/page/receive.html', {root: __dirname })});
+
   
+app.get('/impress', (_, res) => {
+  res.sendFile('public/page/impress.html', {root: __dirname })});
+  
+
 app.use(express.static('public'));
 
 // port listenter
