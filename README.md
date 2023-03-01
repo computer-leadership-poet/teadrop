@@ -6,10 +6,10 @@ It`s build using NodeJS as a backend and Jquery for backend and client communica
 
 ## Gallery
 * Receive page
-![teaddrop_demo_receive.png](teaddrop_demo_receive.png)
+![teaddrop_demo_receive.png](./public/assets/teaddrop_demo_receive.png)
 
 * Share page
-![teaddrop_demo_share.png](teaddrop_demo_share.png)
+![teaddrop_demo_share.png](./public/assets/teaddrop_demo_share.png)
 
 
 ## Installation
