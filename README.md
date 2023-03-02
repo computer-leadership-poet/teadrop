@@ -28,8 +28,9 @@ Clone the git repo using:
 
 Now install all necessary Npm packages with this command:
 
+
 ``
-npm install express path mime-types ws body-parser serve-favicon multer jquery
+npm install
 ``
 ### Configuration an setup
 The default port is 3000. It can be modified in line 6 of the app.js
