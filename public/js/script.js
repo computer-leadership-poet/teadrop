@@ -38,15 +38,14 @@ async function download() {
 }
 
 async function popupclose(){
-  overlay-command.classList.add("animate__animated")
-  overlay.classList.add("animate__zoomOutDown")
-  overlaycommand.classList.add("show-overlay")
-  popup-command.classList.add("animate__animated");
-  popup-command.classList.add("show");
-  popup-command.classList.add("animate__zoomOutDown");
+  overlaycommand.classList.add("animate__animated")
+  overlaycommand.classList.add("animate__fadeOut")
+  popupcommand.classList.add("animate__animated");
+  popupcommand.classList.add("animate__fadeOut");
   await new Promise(resolve => setTimeout(resolve, 1000)); 
   popupcommand.classList.remove("show")
   overlaycommand.classList.remove("show-overlay")
+  document.body.style.overflow = "auto"; // enabling scrolling
 
 }
 
