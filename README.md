@@ -39,9 +39,9 @@ Now you can simply start the server using ``node app.js`` in the project dir.
 The website will be available at 127.0.0.1:{your port}
 
 If you need an imprint for your site just fill out imprint_example.html in the public/page folder. 
-It`s based on German law. If you don`t live in Germay the template might be wrong. This isn`t legal advice if you want to host it permanently contact a lawyer or educate yourself regarding your regional laws.
+It is based on German law. If you don`t live in Germay the template might be wrong. This is not legal advice if you want to host it permanently contact a lawyer or educate yourself regarding your regional laws.
 
-If you don`t need an imprint and just want to test the software, just leave it as it is and rename the file like above, so NodeJs doesn`t crash 😉.
+If you do not need an imprint and just want to test the software, just leave it as it is and rename the file like above, so NodeJs doesn`t crash 😉.
 
 To assign a domain simply create a reverse proxy for your port.
 
