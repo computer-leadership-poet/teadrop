@@ -37,8 +37,8 @@ app.get('/receive', (_, res) => {
   res.sendFile('public/page/receive.html', {root: __dirname })});
 
   
-app.get('/impress', (_, res) => {
-  res.sendFile('public/page/impress.html', {root: __dirname })});
+app.get('/imprint', (_, res) => {
+  res.sendFile('public/page/imprint.html', {root: __dirname })});
   
 
 app.use(express.static('public'));
@@ -169,7 +169,7 @@ app.post('/public/check_code', function(req, res) {
 app.post('/public/check_cheat_code', function(req, res) {
   let check_code = req.body.r_code;
   let status = false
-  cheatcodes = ["666", "1111"]
+  cheatcodes = ["667", "rosebud"]
 
   
   cheatcodes.forEach(element => {

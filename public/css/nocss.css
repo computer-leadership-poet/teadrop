@@ -127,7 +127,7 @@ a {
     box-shadow: 2px 2px 0.7px 0.5px black;
 }
 .bg-peach {
-    background-color: #f5e0dc;
+    background-color: #f5e0dc !important;
     box-shadow: 2px 2px 0.7px 0.5px black;
 }
 

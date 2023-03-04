@@ -176,7 +176,6 @@
 }
 
 #overlay, #overlay-command{
-  position: fixed;
   top: 0;
   left: 0;
   height: 100%;
@@ -243,4 +242,28 @@
 #popup button:hover {
   background-color: #dfe2ff;
 
+}
+.close-popup {
+  padding: 0!important;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2.7rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  height: 60px;
+  width: 60px;
+}
+
+.close-popup:hover {
+  color: black;
+  background-color:#cad3f5;
+}
+
+.show {
+  display: block !important;
+}
+.show-overlay {
+  position: fixed;
 }

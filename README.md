@@ -42,9 +42,9 @@ To assign a domain simply create a reverse proxy for your port.
 
 
 ## NOTICE
-We do not take any responsibility for files transfered using our code, use on your own risk.
-Transferd files arent being encrypted at any time. We dont have the time and recources to implement encryption, if you have experience and would like to help us look at the "Contributing" section
+We do not take any responsibility for files transferred using our code, use on your own risk.
+Transferred files aren't being encrypted at any time. We don't have the time and recources to implement encryption, if you have experience and would like to help us, look at the "Contributing" section!
 
 ## Contributing
-If you find an error feel free to create an issue on Github.
+If you find an error, feel free to create an issue on Github.
 Otherwise you can always create a PR to improve our janky code 😉, or add new features.

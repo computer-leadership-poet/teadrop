@@ -25,7 +25,7 @@ const popup = document.getElementById("popup");
 const popupcommand = document.getElementById("popup-command");
 const overlaycommand = document.getElementById("overlay-command");
 const reloadBtn = document.getElementById("reloadBtn");
-
+let maxFileSize = true
 
 async function download() {
   await new Promise(resolve => setTimeout(resolve, 10));  
@@ -35,6 +35,19 @@ async function download() {
   link.setAttribute('download', filename);
   document.body.appendChild(link);
   link.click();
+}
+
+async function popupclose(){
+  overlay-command.classList.add("animate__animated")
+  overlay.classList.add("animate__zoomOutDown")
+  overlaycommand.classList.add("show-overlay")
+  popup-command.classList.add("animate__animated");
+  popup-command.classList.add("show");
+  popup-command.classList.add("animate__zoomOutDown");
+  await new Promise(resolve => setTimeout(resolve, 1000)); 
+  popupcommand.classList.remove("show")
+  overlaycommand.classList.remove("show-overlay")
+
 }
 
 function share() {
@@ -180,16 +193,20 @@ async function timer() {
 
 function checkFileSize() {
   if (file.size > 1000000000) {
-    overlay.style.display = "block";
+    overlay.classList.add("show")
+    overlay.classList.add("show-overlay")
     overlay.classList.add("animate__animated")
     overlay.classList.add("animate__fadeIn")
-    popup.style.display = "block";
+    overlaycommand.classList.add("show-overlay")
     popup.classList.add("animate__animated");
+    popup.classList.add("show");
     popup.classList.add("animate__slideInDown");
     document.body.style.overflow = "hidden"; // disable scrolling
     startBtn.disabled = true;
     startBtn.classList.add("btn-disabled");
     startBtn.classList.remove("btn-dark");
+
+
 
     document.getElementById("minutes").disabled = true;
     document.getElementById("seconds").disabled = true;
@@ -199,7 +216,11 @@ function checkFileSize() {
 
 filePicker.addEventListener("change", function() {
   file = filePicker.files[0];
-  checkFileSize()
+  if (maxFileSize == true)
+  { 
+    checkFileSize()
+  }
+   
   var reader = new FileReader();
   console.log(file)
   upload_btn.style.display = "none"
@@ -397,10 +418,11 @@ $(this).keypress((e) => {
     if (check_key == true)
     {
       // use e.keyCode
-      overlaycommand.style.display = "block";
+      overlaycommand.classList.add("show-overlay")
+      overlaycommand.classList.add("show")
       overlaycommand.classList.add("animate__animated")
       overlaycommand.classList.add("animate__fadeIn")
-      popupcommand.style.display = "block";
+      popupcommand.classList.add("show")
       popupcommand.classList.add("animate__animated");
       popupcommand.classList.add("animate__slideInDown");
       document.body.style.overflow = "hidden"; // disable scrolling
@@ -423,13 +445,14 @@ function cheatcodecheck(){
       success: function(response) {
         console.log("prossesing")
         if (response == "0"){
-          cheattext.innerHTML="✅  You entered secret cheat code number 0."
+          cheattext.innerHTML="✅  You can upload files bigger than the Saarland now."
+          maxFileSize = false
         }
         else if (response == "1"){
-          cheattext.innerHTML="✅  You entered secret cheat code number 1."
+          cheattext.innerHTML="✅  You entered the secret MEME mode!"
         }
         else if (response == "wrong"){
-          cheattext.innerHTML="❌ The code you entered doesnt exist. You may try again."
+          cheattext.innerHTML="❌ The code you entered doesn't exist. You may or may not try again."
         }
       }
     });
