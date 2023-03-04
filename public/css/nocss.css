@@ -197,3 +197,14 @@ a {
     border-style: inherit;
     padding: 1rem;
 }
+
+footer {
+    position: fixed;
+    background-color: #181926;
+    left: 0;
+    bottom: 0;
+    height: 6%;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 0;
+  }
