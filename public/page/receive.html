@@ -17,7 +17,7 @@
   </nav>
 
    
-    <div id="input_tray" class="center-40 height-center-div bg-peach round-2" style="margin-top: 4rem; padding:2rem">
+    <div id="input_tray" class="center-nav height-center-div bg-peach round-2" style="margin-top: 4rem; padding:2rem">
         <h1 id="receivetext" style="margin-left: 5%;">Please enter a sharing code ...</h1>
         <div style="display: flex; height:10%;">
             <input maxlength="4" placeholder="code" id="code-input" class="input-dark round-2 bg-dark">
@@ -26,16 +26,17 @@
     </div>
 
     <p class="text-center" id="bumm"></p>
-    <div id="receive_tray" class="center-40  height-center-div bg-peach round-2" style="margin-top: 4rem; padding:2rem; display: none;">
-      <h1 id="filename" style="margin-top: 1rem; display: inline-flex;" class="center-80">Dateiname</h1>
+    <div id="receive_tray" class="center-80  bg-peach round-2" style=" text-align: center; margin-bottom: 4rem;padding:2rem; display: none;">
+      <h1 id="filename" style="margin-top: 1rem; display: inline-flex; color:#181926;">Dateiname</h1>
+      <div style="display: flex; height:10%;">
+        <label onclick="download()" class="btn-dark round-2 center-80" style="text-align:center;" id="download_button">Download ⬇️</label>
+      </div>
           <img id="preview-image" class="center-70" style="display:none; margin-top: 4rem;" />
           <audio id="preview-audio" style="display:none;" controls></audio>
           <div class="div50">         
             <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
           </div>
-      <div style="display: flex; height:10%;">
-          <label onclick="download()" class="btn-dark round-2 center-50" style="margin-top: 7rem;" id="download_button">Download ⬇️</label>
-      </div>
+
   </div>
 
   <footer>

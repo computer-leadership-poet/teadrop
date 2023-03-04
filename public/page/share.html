@@ -40,24 +40,23 @@
       </div>
     </div>
     
-
-      <div style="display: flex; height:10%;">
-        <div class="box bg-dark round-2 vertical-center-div" style="width: 60% !important; padding-left: 10%; padding-right: 10%;">
-          <div class="vertical-center">
-            <label class="center-60 bg-peach round-2 text-center animate__animated animate__jackInTheBox btn" style="display: inline-block; height: 100%;  position: relative;" id="upload_btn" for="file-picker">Choose a file</label>        
+      <div style="display: flex; height:10%;" class="container">
+        <div class="box mobile bg-dark round-2 vertical-center-div" style="width: 60%; padding-left: 10%; padding-right: 10%;">
+          <div class="vertical-center" style="width: 100%;">
+            <label class="center-80 bg-peach round-2 text-center animate__animated animate__jackInTheBox btn" style="display: inline-block; height: 100%;  position: relative;" id="upload_btn" for="file-picker">Choose a file</label>           
           </div>  
 
-          <img id="preview-image" class="center-70" style="display:none; margin-top: 4rem;" />
+          <img id="preview-image" style="display:none; margin-top: 4rem;"/>
           <audio id="preview-audio" style="display:none;" controls></audio>
-          <video id="preview-video" style="display: none;" controls autoplay src=""></video>
+          <video id="preview-video" style="display: none; width: 125%; padding-top: 30%; padding-right: 160%;" controls src=""></video>
           <div class="div50">         
-            <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
+            <iframe id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
           </div>
-          <p class="text-center" id="bumm"></p>
+          <p class="text-center" style="color: white; padding-top: 2rem;" id="bumm"></p>
           <input class="btn" type="file" id="file-picker" accept="image/*, audio/*, application/pdf, video/*, text/plain, application/zip" style="display: none;">
         </div>
 
-        <div style="width: 40% !important; padding-left: 10%; padding-right: 10%;" class="box bg-peach round-2">
+        <div class="box mobile bg-peach round-2" style="width: 40% ; padding-left: 10%; padding-right: 10%;" >
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="name">Name: - </h3>
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="size">File size: - </h3>
             <h3 class="text-box-light bg-dark animate__animated animate__zoomInRight" id="type">Type: - </h3>
@@ -73,7 +72,7 @@
         </div>
       </div>
 
-      <div style="display: flex; height:10%;">
+      <div class="mobile" style="display: flex; height:10%; margin-bottom:4rem">
         <div style="width: 40% !important; padding-left: 10%; padding-right: 10%;" class="box height-center-div bg-peach round-2">
           <!-- Downloads müssen über nen Websocket übertragen werden -->
           <h3 class="text-box-light bg-dark animate__animated animate__zoomInLeft" id="Code">Sharing Code: ????</h3>
@@ -85,7 +84,6 @@
           </div>
         </div>
       </div>
-
 
     <footer>
       <div style="color: #f5e0dc !important">

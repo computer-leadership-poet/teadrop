@@ -157,11 +157,19 @@ app.post('/public/name', function(req, res) {
 
 app.post('/public/check_code', function(req, res) {
   let check_code = req.body.r_code;
+  let status = false
 
-  if (codearray.indexOf(check_code) !== -1) {
-    res.send("Top");
-  }else{
-    res.send("Blä");
+  codearray.forEach(element => {
+    if (element == check_code)
+    {
+      res.send("Top")
+      status = true
+    }
+  });
+
+  if (status != true)
+  {
+    res.send("Blä")
   }
 });
 
@@ -169,7 +177,7 @@ app.post('/public/check_code', function(req, res) {
 app.post('/public/check_cheat_code', function(req, res) {
   let check_code = req.body.r_code;
   let status = false
-  cheatcodes = ["667", "rosebud"]
+  cheatcodes = ["667", "rosebud", "whga"]
 
   
   cheatcodes.forEach(element => {

@@ -268,3 +268,14 @@
   position: fixed;
 }
 
+
+@media screen and (max-width: 768px) { /* adjust max-width as needed */
+  .container {
+    display: flex;
+    flex-direction: column; /* stack content vertically */
+  }
+
+  .mobile {
+    width: 75% !important;
+  }
+}
