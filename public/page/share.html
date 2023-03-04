@@ -19,9 +19,9 @@
 
     <!-- Command Popup-->
     <div id="overlay-command"></div>
-    <div class="" id="popup-command">
+    <div class="popup-mobile" id="popup-command" >
       <div class="popup-container">
-        <p id="cheattext">Uii. You found a secret! As a reward, you can try millions of different codes to get special features ¯\_(ツ)_/¯.</p>
+        <p id="cheattext" style="font-size: 180%;">Uii. You found a secret! As a reward, you can try millions of different codes to get special features ¯\_(ツ)_/¯.</p>
         <div style="display: flex; height:11%; width: 90%">
           <input placeholder="code" id="cheat-input" class="input-bright round-2 ">
           <label onclick="cheatcodecheck()" style="padding-top: 1.5%;" class="btn-bright round-2">Los!</label>
@@ -33,7 +33,7 @@
     
     <!-- Error Popup-->
     <div id="overlay"></div>
-    <div class="" id="popup">
+    <div class="popup-mobile" id="popup">
       <div class="popup-container">
         <p>Oops! Seems like your file exceeds the 1 GB limit. 🫤 </p>
         <button id="reloadBtn">Reload</button>
@@ -89,7 +89,8 @@
       <footer>
       <div style="color: #f5e0dc !important">
           <p style="margin-left:1rem" class="copyright">© 2023  
-          <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint </a></p>
+          <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint </a>
+          <label style="color: #f5e0dc !important" class="nav-header" onclick="mobile_cheats()">About </label></p>
       </div>
     </footer>
       <script src="/public/js/jquery-3.6.0.min.js"></script>

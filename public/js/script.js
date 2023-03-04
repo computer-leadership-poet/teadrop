@@ -476,6 +476,17 @@ let check_key = false
 
 var keys = {};
 
+function mobile_cheats(){
+  overlaycommand.classList.add("show-overlay")
+      overlaycommand.classList.add("show")
+      overlaycommand.classList.add("animate__animated")
+      overlaycommand.classList.add("animate__fadeIn")
+      popupcommand.classList.add("show")
+      popupcommand.classList.add("animate__animated");
+      popupcommand.classList.add("animate__slideInDown");
+      document.body.style.overflow = "hidden"; // disable scrolling
+}
+
 $(this).keypress((e) => {
   if (e.keyCode == 13)
   check_key = true
