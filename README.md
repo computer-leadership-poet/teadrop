@@ -38,7 +38,7 @@ The default port is 3000. It can be modified in line 6 of the app.js
 Now you can simply start the server using ``node app.js`` in the project dir.
 The website will be available at 127.0.0.1:{your port}
 
-If you need an imprint for your site just fill out imprint_example.html in the public/page folder. 
+If you need an imprint for your site just fill out imprint_example.html in the public/page folder and rename it to imprint.html 
 
 If you do not need an imprint and just want to test the software, just leave it as it is and rename the file like above, so NodeJs doesn`t crash 😉.
 
