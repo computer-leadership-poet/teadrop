@@ -26,7 +26,7 @@
     </div>
 
     <p class="text-center" id="bumm"></p>
-    <div id="receive_tray" class="center-nav bg-peach round-2" style="width: 95%; text-align:center; display: none;">
+    <div id="receive_tray" class="center-nav bg-peach round-2" style="width: 95%; text-align:center; display: none; padding-bottom: 4rem; margin-bottom: 5rem;">
       <h1 id="filename" style="margin-top: 1rem; display: inline-flex; color:#181926;">Dateiname</h1>
       <div style="display: flex; height:10%;">
         <label onclick="download()" class="btn-dark round-2 center-80" style="text-align:center;" id="download_button">Download ⬇️</label>
@@ -42,11 +42,22 @@
   <footer>
     <div style="color: #f5e0dc !important">
         <p style="margin-left:1rem" class="copyright">© 2023  
-        <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint </a></p>
+        <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint & Privacy Policy</a></p>
     </div>
-  </footer>
+</footer>
+
 
 </body>
 <script src="/public/js/jquery-3.6.0.min.js"></script>
 <script src="/public/js/script.js" charset=UTF-8></script>
+<script>   
+  const input = document.getElementById("code-input");
+  input.addEventListener("keypress", function(checkkey) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      check()              
+    }
+  }); 
+
+</script>
 </html>

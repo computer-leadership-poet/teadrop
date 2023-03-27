@@ -17,6 +17,7 @@
   </nav>
    
 
+
       <div class="box bg-dark round-2"style="width: 80% !important; margin-left: 10%; margin-right: 10%; height: 100%; padding-bottom:10em; padding-top:6rem;">
           <div onclick="share()" class="btn-bright round-2 btn share vertical-center-div">
             <h1 class="text vertical-center">share</h1>
@@ -30,10 +31,21 @@
     <footer>
       <div style="color: #f5e0dc !important">
           <p style="margin-left:1rem" class="copyright">© 2023  
-          <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint </a></p>
+          <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint & Privacy Policy</a></p>
       </div>
   </footer>
       <script src="/public/js/jquery-3.6.0.min.js"></script>
       <script src="public/js/script.js"></script>
+      <script>
+        overlay.classList.add("show")
+        overlay.classList.add("show-overlay")
+        overlay.classList.add("animate__animated")
+        overlay.classList.add("animate__fadeIn")
+        popup.classList.add("animate__animated");
+        popup.classList.add("show");
+        popup.classList.add("animate__slideInDown");
+        document.body.style.overflow = "hidden"; // disable scrolling
+  
+      </script>
 </body>
 </html>

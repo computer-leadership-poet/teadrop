@@ -140,7 +140,6 @@
   border-style: solid;
   border-color: #cad3f5;
   border-width: 0.4rem;
-  color: white;
 }
 
 .div50 {
@@ -175,7 +174,7 @@
   color: #cad3f5;
 }
 
-#overlay, #overlay-command{
+#overlay, #overlay-command, #overlay-notice{
   top: 0;
   left: 0;
   height: 100%;
@@ -198,7 +197,7 @@
   border-radius: 10px;
 }
 
-#popup-command{
+#popup-command, #popup-notice{
   position: fixed;
   top: 10%;
   left: 10%;
@@ -208,6 +207,7 @@
   height: 370px;
   display: none;
   border-radius: 10px;
+  padding-bottom: 2rem;
 }
 
 .popup-container {
@@ -218,7 +218,7 @@
   height: 100%;
 }
 
-#popup p, #popup-command p{
+#popup p, #popup-command p, #popup-notice p{
   font-size: 2.4rem;
   margin-bottom: 20px;
   color: white;
@@ -254,6 +254,18 @@
   border-radius: 1rem;
   height: 60px;
   width: 60px;
+}
+
+.close-popup-notice {
+  padding: 0!important;
+  border: none;
+  top: 10px;
+  right: 10px;
+  font-size: 2.7rem;
+  cursor: pointer;
+  border-radius: 1rem;
+  height: 60px;
+  width: 160px;
 }
 
 .close-popup:hover {

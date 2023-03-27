@@ -1,3 +1,4 @@
+let meme = false;
 const filePicker = document.getElementById("file-picker");
 const previewImage = document.getElementById("preview-image");
 const previewVideo = document.getElementById("preview-video")
@@ -24,9 +25,28 @@ const overlay = document.getElementById("overlay");
 const popup = document.getElementById("popup");
 const popupcommand = document.getElementById("popup-command");
 const overlaycommand = document.getElementById("overlay-command");
+const popupnotice = document.getElementById("popup-notice");
+const overlaynotice = document.getElementById("overlay-notice");
 const reloadBtn = document.getElementById("reloadBtn");
 let maxFileSize = true
 let maxTime = false
+
+const videos = [
+  "https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1",
+  "https://www.youtube.com/embed/SChnJDfmrSU?autoplay=1",
+  "https://www.youtube.com/embed/SChnJDfmrSU?autoplay=1",
+  "https://www.youtube.com/embed/t7xSj9ixnOg?autoplay=1",
+  "https://www.youtube.com/embed/w0AOGeqOnFY?autoplay=1",
+  "https://www.youtube.com/embed/SChnJDfmrSU?autoplay=1",
+  "https://www.youtube.com/embed/_B0CyOAO8y0?autoplay=1",
+  "https://www.youtube.com/embed/6HX8YNk2x7I?autoplay=1",
+  "https://www.youtube.com/embed/kZNoDWd7g3k?autoplay=1",
+  "https://www.youtube.com/embed/zS8Yg-_vwBY?autoplay=1",
+  "https://www.youtube.com/embed/RZvsGdJP3ng?autoplay=1",
+  "https://www.youtube.com/embed/B1BnKd7RrjE?autoplay=1"
+]
+
+let randomVideo = "quak" // 🦆
 
 async function download() {
   await new Promise(resolve => setTimeout(resolve, 10));  
@@ -319,41 +339,56 @@ function reloadPage() {
 }
 
 function display() {
+  if (meme == false)
+  {
+    if (file.type.match("image.*")) {
+      // Datei ist ein Bild
+      previewImage.src = URL.createObjectURL(file);
+      previewImage.style.display = "block";
+      previewAudio.style.display = "none";
+      previewDocument.style.display = "none";
 
-  if (file.type.match("image.*")) {
-    // Datei ist ein Bild
-    previewImage.src = URL.createObjectURL(file);
-    previewImage.style.display = "block";
-    previewAudio.style.display = "none";
-    previewDocument.style.display = "none";
+    } else if (file.type.match("audio.*")) {
+      // Datei ist eine Audio-Datei
+      previewAudio.src = URL.createObjectURL(file);
+      previewAudio.style.display = "block";
+      previewImage.style.display = "none";
+      previewDocument.style.display = "none";
 
-  } else if (file.type.match("audio.*")) {
-    // Datei ist eine Audio-Datei
-    previewAudio.src = URL.createObjectURL(file);
-    previewAudio.style.display = "block";
+    } else if (file.type.match("video.*")) {
+      // Datei ist eine Video-Datei
+      previewVideo.src = URL.createObjectURL(file);
+      previewVideo.style.display = "block";
+
+    } else if (file.type.match("application/pdf")) {
+      // Datei ist eine pdf-Datei
+      previewDocument.style.display = "block";
+      previewDocument.src = URL.createObjectURL(file);
+
+    } else if (file.type.match("application/zip") || file.type.match("application/x-zip-compressed"))  {
+      // Datei ist eine zip-Datei
+      previewImage.src = "/public/assets/zip.png";
+      previewImage.style.display = "block";
+      previewAudio.style.display = "none";
+      previewImage.style.width = "25%";
+      previewDocument.style.display = "none";
+
+    } else {
+      document.getElementById("bumm").innerHTML = "No preview available 🫤";
+    }
+  }else{
     previewImage.style.display = "none";
-    previewDocument.style.display = "none";
-
-  } else if (file.type.match("video.*")) {
-    // Datei ist eine Video-Datei
-    previewVideo.src = URL.createObjectURL(file);
-    previewVideo.style.display = "block";
-
-  } else if (file.type.match("application/pdf")) {
-    // Datei ist eine pdf-Datei
-    previewDocument.style.display = "block";
-    previewDocument.src = URL.createObjectURL(file);
-
-  } else if (file.type.match("application/zip") || file.type.match("application/x-zip-compressed"))  {
-    // Datei ist eine zip-Datei
-    previewImage.src = "/public/assets/zip.png";
-    previewImage.style.display = "block";
     previewAudio.style.display = "none";
-    previewImage.style.width = "25%";
     previewDocument.style.display = "none";
 
-  } else {
-    document.getElementById("bumm").innerHTML = "No preview available 🫤";
+    randomVideo = Math.floor(Math.random() * videos.length);
+    const sven = document.getElementById("sven")
+    sven.style.display = "block";
+    sven.src = videos[randomVideo];
+    console.log(videos[randomVideo]);
+
+    ///hier ändern bitte
+
   }
   
 }
@@ -531,6 +566,8 @@ function cheatcodecheck(){
         }
         else if (response == "1"){
           cheattext.innerHTML="✅  You entered the secret MEME mode!"
+          meme = true;
+          document.body.style = 'background-image: url("/assets/meme.jpg")!important; background-size: 10%; font-family: "Comic Sans MS", "Comic Sans", cursive'
         }
         else if (response == "2"){
           maxTime = true;

@@ -51,7 +51,8 @@
           <audio id="preview-audio" style="display:none;" controls></audio>
           <video id="preview-video" style="display: none;" controls autoplay src=""></video>
           <div class="div50">         
-            <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none"></iframe>
+            <iframe class="" id="preview-document" src="" type="application/pdf" style="display:none; width:600px;"></iframe>
+            <iframe width="560" style="display:none; width:600px;"  height="315" id="sven" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
           <p class="text-center" id="bumm"></p>
           <input class="btn" type="file" id="file-picker" accept="image/*, audio/*, application/pdf, video/*, text/plain, application/zip" style="display: none;">
@@ -87,13 +88,22 @@
       </div>
 
       <footer>
-      <div style="color: #f5e0dc !important">
-          <p style="margin-left:1rem" class="copyright">© 2023  
-          <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint </a>
-          <label style="color: #f5e0dc !important" class="nav-header" onclick="mobile_cheats()">About </label></p>
-      </div>
+        <div style="color: #f5e0dc !important">
+            <p style="margin-left:1rem" class="copyright">© 2023  
+            <a style="color: #f5e0dc !important" class="nav-header" href="/imprint">Imprint & Privacy Policy</a></p>
+        </div>
     </footer>
+  
       <script src="/public/js/jquery-3.6.0.min.js"></script>
       <script src="public/js/script.js"></script>
+      <script>   
+            const inputCheat = document.getElementById("cheat-input");
+            inputCheat.addEventListener("keypress", function(checkkey) {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                cheatcodecheck()              }
+            }); 
+
+      </script>
 </body>
 </html>
